@@ -107,14 +107,14 @@ if (($SourcePath -eq $LeftPath) -and ($SourceFocus -eq $LeftFocus)) {
   $selectedTab = 1
 }
 Write-Host "Select tab $selectedTab according to tcmd active panel"
-& c:\bin\ConEmu\ConEmu\ConEmuC64.exe "-GuiMacro:$($handleHex)" Tab 7 $selectedTab
+& $CONEMUC "-GuiMacro:$handleHex" Tab 7 $selectedTab
 
 
 
 Write-Host "Check if there is no running subprocess in current tab"
-[string]$activePID = & c:\bin\ConEmu\ConEmu\ConEmuC64.exe "-GuiMacro:$($handleHex)" GetInfo ActivePID
+[string]$activePID = & $CONEMUC "-GuiMacro:$handleHex" GetInfo ActivePID
 Write-Host "ActivePID:" $activePID
-[string]$rootXML = & c:\bin\ConEmu\ConEmu\ConEmuC64.exe "-GuiMacro:$($handleHex)" GetInfo Root
+[string]$rootXML = & $CONEMUC "-GuiMacro:$handleHex" GetInfo Root
 Write-Host "RootXML:" $rootXML
 [string]$rootPID = ""
 
@@ -128,7 +128,7 @@ else {
 
 if (($rootPID -eq $activePID) -or ($rootPID -eq "")) {
   Write-Host "Changing directory"
-  [string]$CurDir = & c:\bin\ConEmu\ConEmu\ConEmuC64.exe "-GuiMacro:x$($handle.ToString('X'))" GetInfo CurDir
+  [string]$CurDir = & $CONEMUC "-GuiMacro:$handleHex" GetInfo CurDir
   if ($CurDir[$CurDir.Length-1] -eq "\") {
     $CurDir = $CurDir.Substring(0, $CurDir.Length - 1)
   }
@@ -139,7 +139,7 @@ if (($rootPID -eq $activePID) -or ($rootPID -eq "")) {
   if (!($CurDir -eq $SourcePathTrimSlash)) {
     [string]$cdCommand = "cd /D " + $SourcePathTrimSlash.Replace('\', '\\')
     Write-Host "Send command $cdCommand"
-    & c:\bin\ConEmu\ConEmu\ConEmuC64.exe "-GuiMacro:$($handleHex)" print $cdCommand"`n"
+    & $CONEMUC "-GuiMacro:$handleHex" print $cdCommand"`n"
   } else {
     Write-Host "Directories equals, skip"
   }
@@ -152,7 +152,7 @@ if (($rootPID -eq $activePID) -or ($rootPID -eq "")) {
       $executeCommand = "`"$($executeCommand)`""
     }
     Write-Host "Send command $executeCommand"
-    & c:\bin\ConEmu\ConEmu\ConEmuC64.exe "-GuiMacro:$($handleHex)" print $executeCommand"`n"
+    & $CONEMUC "-GuiMacro:$handleHex" print $executeCommand"`n"
   }
 } else {
   Write-Host "Skip sending commands, some subprocess is running"
