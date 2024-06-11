@@ -2,7 +2,7 @@
 
 This is a script which syncronize [Total Commander]([url](https://www.ghisler.com/)) panels with [ConEmu]([url](https://conemu.github.io/)) console. It's not as seamless as FAR manager integration, but close.
 
-<img src="imgs/01.png" width="450"/> <-> <img src="imgs/02.png" width="450"/>
+<img src="imgs/01.png" width="400"/> <-> <img src="imgs/02.png" width="400"/>
 
 ## Features
 
@@ -35,7 +35,7 @@ This is a script which syncronize [Total Commander]([url](https://www.ghisler.co
    Press OK to return to Configuration window.
 5. Configure command to open console
    
-   Window Configuration: add Parameters `/c start /min "" powershell -WindowStyle hidden -NoLogo [path to script sync_conemu.ps1] -SourcePath "'%P'" -SourceFocus "'%N'" -TargetPath "'%T'" -TargetFocus "'%M'" -LeftPath "'%X%P'" -LeftFocus "'%X%N'" -RightPath "'%X%T'" -RightFocus "'%X%M'" -ConemuFolder [path to folder with ConEmu]`
+   Window Configuration: add Parameters `/c start /min "" powershell -WindowStyle hidden -NoLogo [path to script sync_conemu.ps1] -SourcePath "\"%P\"" -SourceFocus "\"%N\"" -TargetPath "\"%T\"" -TargetFocus "\"%M\"" -LeftPath "\"%X%P\"" -LeftFocus "\"%X%N\"" -RightPath "\"%X%T\"" -RightFocus "\"%X%M\"" -ConemuFolder [path to folder with ConEmu]`
 
    ![](imgs/07.png)
    
@@ -52,13 +52,15 @@ This is a script which syncronize [Total Commander]([url](https://www.ghisler.co
 
 9. If the execution of scripts is disabled in powershell, add argument `-ExecutionPolicy bypass`
 
-10. If nothing still works, remove parameter `-WindowStyle hidden`, add `-NoExit` and try to read error messages in powershell window.
+10. If something is not working as intended, remove parameter `-WindowStyle hidden`, add `-NoExit` and try to read logs in powershell window.
 
 ## Command parameters
 
 `cmd /c start /min ""` and `-WindowStyle hidden -NoLogo` - all this is done to run powershell silently without window. Its window still flashes in taskpanel for a moment, so if you've got better solution let me know.
 
-`-SourcePath "'%P'" -SourceFocus "'%N'"`, etc - currently selected directories and files in Total Commander panels. [Read more about Total Commander parameters here]([url](https://softpanorama.org/OFM/Total_commander/total_commander_start_menu.shtml)).
+`-SourcePath "\"%P\"" -SourceFocus "\"%N\""`, etc - currently selected directories and files in Total Commander panels. [Read more about Total Commander parameters here](https://softpanorama.org/OFM/Total_commander/total_commander_start_menu.shtml).
+
+Weird parentheses around parameters: `"\"%P\""` - looks like it is the only way to pass file or folder name with spaces, slashes and single quotes to powershell.
 
 `-ConemuFolder` - where your ConEmu binaries are. The script needs both ConEmu.exe and ConEmuC.exe, so it needs path to a folder, not just to an executable.
 
