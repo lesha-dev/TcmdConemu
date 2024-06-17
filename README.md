@@ -1,17 +1,20 @@
 # ConEmu and Total Commander integration
 
-This is a script which syncronize [Total Commander]([url](https://www.ghisler.com/)) panels with [ConEmu]([url](https://conemu.github.io/)) console. It's not as seamless as FAR manager integration, but close.
+This is a script which syncronize [Total Commander]([url](https://www.ghisler.com/)) panels with [ConEmu]([url](https://conemu.github.io/)) console. Inspired by seamless FAR manager integration with command line.
 
-<img src="imgs/01.png" width="400"/> <-> <img src="imgs/02.png" width="400"/>
+<p align="center"><img src="imgs/01.png" width="500"/></p>
+<p align="center">↕</p>
+<p align="center"><img src="imgs/02.png" width="500"/></p>
 
 ## Features
 
 - open ConEmu with two separate tabs
 - cd to current directory in ConEmu tab from corresponding Total Commander panel
-- run scripts and programs in ConEmu
+- send scripts and programs to execute in ConEmu
 - automatically bring ConEmu window to foreground
+- no additional dependencies
 
-## Configuration
+## Setup
 
 1. Download [sync_conemu.ps1]([url](https://github.com/lesha-dev/TcmdConemu/blob/main/sync_conemu.ps1))
 3. Create command to just run `cmd`
