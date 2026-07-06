@@ -137,7 +137,7 @@ if (($rootPID -eq $activePID) -or ($rootPID -eq "")) {
   Write-Host "Tcmd directory:  " $SourcePathTrimSlash
 
   if (!($CurDir -eq $SourcePathTrimSlash)) {
-    [string]$cdCommand = "cd /D " + $SourcePathTrimSlash.Replace('\', '\\')
+    [string]$cdCommand = 'cd /D ' + '\"' + $SourcePathTrimSlash.Replace('\', '\\') + '\"'
     Write-Host "Send command $cdCommand"
     & $CONEMUC "-GuiMacro:$handleHex" print $cdCommand"`n"
   } else {
